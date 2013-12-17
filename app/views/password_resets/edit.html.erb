@@ -1,0 +1,11 @@
+<h1>Reset Password Form</h1>
+
+<form action="<%= password_reset_url(@user) %>" method="post">
+  <input type="hidden" name="_method" value="PUT">
+
+  <label for="password">Password</label>
+  <input type="password" id="password" name="user[password]">
+  <br>
+
+  <input type="submit" value="Reset Password">
+</form>

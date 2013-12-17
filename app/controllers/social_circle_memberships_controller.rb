@@ -1,0 +1,2 @@
+class SocialCircleMembershipsController < ApplicationController
+end
