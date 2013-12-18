@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :email, :token, :password
+  attr_accessible :email, :token, :password, :circle_ids
   attr_reader :password
 
   before_validation :ensure_token
@@ -11,16 +11,24 @@ class User < ActiveRecord::Base
            :primary_key => :id,
            :foreign_key => :user_id
 
-  has_many :circles, :through => :memberships, :source => :circle
+  has_many :circles,
+           :through => :memberships,
+           :source => :circle
 
+  has_many :posts
+
+  has_many :links,
+           :through => :posts,
+           :source => :links
 
   def self.generate_token
-    SecureRandom::urlsafe_base64(16)
+    SecureRandom.urlsafe_base64(16)
   end
 
   def reset_token!
     self.token = self.class.generate_token
     self.save!
+    self.token
   end
 
   def password=(password)

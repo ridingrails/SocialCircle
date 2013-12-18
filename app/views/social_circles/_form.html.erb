@@ -1,0 +1,37 @@
+
+<form action="<%= !circle_var.persisted? ? social_circles_url :
+  social_circle_url(circle_var) %>" method="post">
+  <input type="text" name="circle[name]" id="circle_name"
+
+  <% if circle_var.persisted? %>
+    value= <%= circle_var.name %>
+  <% end %>
+  >
+
+  <% if circle_var.persisted? %>
+    <input type="hidden" name="_method" value="PUT">
+  <% end %>
+
+  <input type="hidden" name="circle[member_ids][]" value="">
+  <% users.each do |user| %>
+  <br>
+    <% html_id = "circle_user_ids_#{user.id}" %>
+    <input type="checkbox"
+           name="circle[member_ids][]"
+           <%= "checked" if (circle_var.persisted? &&
+                circle_var.member_ids.include?(user.id)) %>
+           value="<%= user.id %>"
+           id="<%= html_id %>" >
+    <label for="<%= html_id %>">
+      <%= user.email %>
+    </label> <%= link_to "See User", user_url(user) %>
+  <% end %>
+
+  <br>
+
+  <% if circle_var.persisted? %>
+    <input type="submit" value="Update Circle">
+  <% else %>
+    <input type="submit" value="Create Circle">
+  <% end %>
+</form>

@@ -1,0 +1,7 @@
+<%= link_to "Add a Circle", new_social_circle_url %>
+
+<% @circles.each do |circle| %>
+  <br>
+  <%= circle.name %>
+  <br>
+<% end %>

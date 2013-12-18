@@ -1,9 +1,3 @@
 <h1>Create New Circle</h1>
 
-<%= form_for(@circle) do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <br>
-
-  <%= f.submit "Create New Circle" %>
-<% end %>
+<%= render partial: "form", :locals => { :circle_var => @circle, :users => @users } %>

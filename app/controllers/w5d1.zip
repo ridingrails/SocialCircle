@@ -1,0 +1,21 @@
+class SocialCirclesController < ApplicationController
+  def new
+    @users = User.all
+    @circle = SocialCircle.new
+  end
+
+  def create
+    @circle = SocialCircle.new(params[:circle])
+    if @circle.save
+      redirect_to social_circle_url(@circle)
+    else
+      flash[:errors] = @circles.errors.full_messages
+      render :new
+    end
+  end
+
+  def show
+    @circle = SocialCircle.find(params[:id])
+    @members = @circle.
+  end
+end

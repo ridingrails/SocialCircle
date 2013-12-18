@@ -1,0 +1,7 @@
+<h2><%= @circle.name.capitalize %> Page</h2>
+
+<% @circle.members.each do |member| %>
+  <%= member.email %>
+<% end %>
+<br>
+<%= link_to "Edit Members", edit_social_circle_url(@circle) %>

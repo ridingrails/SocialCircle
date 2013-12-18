@@ -1,8 +1,22 @@
 FriendCircle::Application.routes.draw do
-  resources :users
+  resources :users do
+    resources :posts, :only => [:new, :create, :index] do
+      resources :links, :only => [:new, :create, :index]
+    end
+  end
+
+  get '/feed', :to => 'post_shares#feed'
+
+  resources :posts, :except => [:new, :create, :index]
+
+  resources :links, :except => [:new, :create, :index]
+
   resources :social_circles
+
   resources :password_resets
+
   resource :session, :only => [:new, :create, :destroy]
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

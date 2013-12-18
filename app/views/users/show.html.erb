@@ -1,0 +1,48 @@
+<h2><%= @user.email %></h2>
+
+<h3>Make a Post</h3>
+
+<form action="<%= user_posts_url(@user) %>" method="post">
+  <label for="post_body">Post Title</label>
+  <input type="text" id="post_body" name="post[body]">
+
+  <h3>Choose circles to share post with</h3>
+
+  <% @circles.each do |circle| %>
+  <br>
+    <% html_id = "post_circle_ids_#{circle.id}" %>
+    <input type="checkbox"
+           name="post[circle_ids][]"
+           value="<%= circle.id %>"
+           id="<%= html_id %>" >
+    <label for="<%= html_id %>">
+      <%= circle.name %>
+    </label>
+  <% end %>
+
+  <br>
+
+  <h3>Create links for the post</h3>
+
+  <% 3.times do |time| %>
+  <br>
+    <input type="text"
+           name="post[links_attributes][<%= time %>][title]"
+           id="link_title_<%= time %>" >
+    <label for="link_title_<%= time %>">
+      Link <%= time + 1 %> title
+    </label>
+
+    <input type="text"
+           name="post[links_attributes][<%= time %>][url]"
+           id="link_url_<%= time %>" >
+    <label for="link_url_<%= time %>">
+      Link <%= time + 1 %> url
+    </label>
+  <% end %>
+
+  <br>
+
+
+  <input type="submit" value="Create Post">
+</form>

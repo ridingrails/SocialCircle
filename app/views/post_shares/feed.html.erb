@@ -1,0 +1,6 @@
+<% @feed_posts.each do |item| %>
+  <%= item.body %>
+  <% item.links.each do |link| %>
+    <%= link.title %> <%= link.url %>
+  <% end %>
+<% end %>
